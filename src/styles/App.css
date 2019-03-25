@@ -1,0 +1,126 @@
+.App {
+  text-align: center;
+}
+
+div {
+  width: 100 vw;
+  height: 50%;
+}
+
+div form {
+  width: 100%;
+  background-color: aqua;
+}
+
+form input {
+  margin-left: 2%;
+}
+button.add {
+  padding: 10px;
+  margin: 10px;
+}
+.boardScore {
+  width: 100%;
+  /* height: 70vh; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: green;
+  justify-content: space-around;
+  align-content: center;
+
+  text-align: center;
+}
+.boardScore div {
+  flex-basis: 30%;
+  height: 80%;
+  border: solid 2px black;
+  display: flex;
+  align-content: space-around;
+  align-items: center;
+  align-content: space-around;
+  flex-direction: column;
+  margin: 10px 0px;
+}
+.boardScore div h1 {
+  width: 100%;
+  height: 10%;
+  padding: 0;
+  text-decoration-line: underline;
+  text-transform: uppercase;
+}
+.boardScore div ul {
+  width: 100%;
+  list-style-type: square;
+  list-style-position: outside;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+.boardScore div ul li {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 5px;
+  align-items: center;
+  margin-right: 10px;
+  flex-shrink: 1;
+}
+.boardScore div ul li span {
+  /* border: 2px solid black; */
+  padding: 2px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.breakfast {
+  background-color: white;
+}
+.secondBreakfast {
+  background-color: red;
+}
+
+li p {
+  text-decoration-line: underline;
+}
+
+.productName {
+  text-decoration-line: underline;
+  font-style: italic;
+}
+.boardScore div h3 i {
+  text-decoration-line: underline;
+}
+.boardScore div h3 {
+}
+
+/*Tabela*/
+.boardScore table {
+  width: 100%;
+  position: relative;
+}
+.boardScore table td,
+.boardScore table th {
+  border: 1px solid black;
+}
+/*Tabelka podsumowująca*/
+.dailyCounter {
+  width: 20%;
+  height: 10%;
+  border: 2px solid black;
+  position: absolute;
+  right: 5%;
+  top: 3%;
+  text-align: center;
+  padding: 0.5%;
+}
+.dailyCounter td,
+.dailyCounter th {
+  border: 2px solid black;
+}

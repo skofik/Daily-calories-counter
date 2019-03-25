@@ -1,0 +1,65 @@
+import React from "react";
+import BreakfastTab from "./BreakfastTab";
+import SecondBreakfasTab from "./SecondBreakfasTab";
+import DinnerTab from "./DinnerTab";
+import SnackTab from "./SnackTab";
+import SupperTab from "./SupperTab";
+import DailyCounter from "./DailyCounter";
+
+const ShowScore = props => {
+  const tabel = props.product;
+  const breakfastTab = [];
+  const secondBreakfastTab = [];
+  const dinnerTab = [];
+  const snackTab = [];
+  const supperTab = [];
+
+  const product = tabel.map(product => {
+    if (product.mealTime === "breakfast") {
+      breakfastTab.push(product);
+    } else if (product.mealTime === "second-Breakfast") {
+      secondBreakfastTab.push(product);
+    } else if (product.mealTime === "dinner") {
+      dinnerTab.push(product);
+    } else if (product.mealTime === "snack") {
+      snackTab.push(product);
+    } else if (product.mealTime === "supper") {
+      supperTab.push(product);
+    }
+    return product;
+  });
+
+  const handleRemove = name => {
+    let index = tabel.indexOf(name);
+    tabel.splice(index, 1);
+    console.log(tabel);
+  };
+
+  return (
+    <>
+      <div className="boardScore">
+        {breakfastTab.length >= 1 ? (
+          <BreakfastTab tabBreakfast={breakfastTab} remove={handleRemove} />
+        ) : null}
+        {secondBreakfastTab.length >= 1 ? (
+          <SecondBreakfasTab
+            secondBreakfastTab={secondBreakfastTab}
+            remove={handleRemove}
+          />
+        ) : null}
+        {dinnerTab.length >= 1 ? (
+          <DinnerTab tabDinner={dinnerTab} remove={handleRemove} />
+        ) : null}
+        {snackTab.length >= 1 ? (
+          <SnackTab snackTab={snackTab} remove={handleRemove} />
+        ) : null}
+        {supperTab.length >= 1 ? (
+          <SupperTab supperTab={supperTab} remove={handleRemove} />
+        ) : null}
+      </div>
+      <DailyCounter product={props.product} />
+    </>
+  );
+};
+
+export default ShowScore;
