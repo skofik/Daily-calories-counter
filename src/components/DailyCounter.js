@@ -34,7 +34,7 @@ const DailyCounter = props => {
       <table>
         <tbody>
           <tr>
-            <th rowSpan="2">Twoje dzienne spożcie wartości</th>
+            <th rowSpan="2">Podsumowanie dzienne</th>
             <th>B</th>
             <th>W</th>
             <th>T</th>

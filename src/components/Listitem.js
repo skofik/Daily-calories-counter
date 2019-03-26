@@ -6,18 +6,13 @@ const Listitem = props => {
     let amountCarbons = 0;
     let amountFat = 0;
     let amountCalories = 0;
-
     for (let i = 0; i < props.short.length; i++) {
-      amountProtein =
-        amountProtein +
+      amountProtein +=
         props.short[i].protein * 1 * (props.short[i].amount / 100);
-      amountCarbons =
-        amountCarbons +
+      amountCarbons +=
         props.short[i].carbohydrate * 1 * (props.short[i].amount / 100);
-      amountFat =
-        amountFat + props.short[i].fat * 1 * (props.short[i].amount / 100);
-      amountCalories =
-        amountCalories +
+      amountFat += props.short[i].fat * 1 * (props.short[i].amount / 100);
+      amountCalories +=
         props.short[i].calorie * 1 * (props.short[i].amount / 100);
     }
     return (
@@ -29,46 +24,40 @@ const Listitem = props => {
       </>
     );
   };
+
+  const liCreation = () => {
+    return props.short.map(item => (
+      <li key={item.name}>
+        <span className="productName">{item.name}</span>
+        <span>
+          |{item.protein}
+          <small>(b)</small>|
+        </span>
+        <span>
+          |{item.carbohydrate}
+          <small>(w)</small>|
+        </span>
+        <span>
+          |{item.fat}
+          <small>(t)</small>|
+        </span>
+        <span>
+          |{item.calorie}
+          <small>(kcal)</small>|
+        </span>
+        <button className="buttonRemove" onClick={() => props.remove(item)}>
+          x
+        </button>
+      </li>
+    ));
+  };
   const name = props.short[0].mealTime;
+
   return (
     <>
       <h1> {name}</h1>
-      <h3>
-        <i>Nazwa produktu</i> | białka | węgle | tłuszcze| kalorie
-      </h3>
-      <ul>
-        {props.short.map(item => (
-          <li key={item.name}>
-            <span className="productName">{item.name} : </span>
-            <span>
-              <b>|</b>
-              {item.protein}
-              <small>(p)</small>
-              <b>|</b>
-            </span>
-            <span>
-              <b>|</b>
-              {item.carbohydrate}
-              <small>(c)</small>
-              <b>|</b>
-            </span>
-            <span>
-              <b>|</b>
-              {item.fat}
-              <small>(f)</small>
-              <b>|</b>
-            </span>
-            <span>
-              <b>|</b>
-              {item.calorie}
-              <small>(kcal)</small>
-              <b>|</b>
-            </span>
-            <button onClick={() => props.remove(item)}>x</button>
-          </li>
-        ))}
-      </ul>
-
+      <h3>Nazwa produktu | białka | węgle | tłuszcze | kalorie</h3>
+      <ul>{liCreation()}</ul>
       <table>
         <tbody>
           <tr>
@@ -78,7 +67,6 @@ const Listitem = props => {
             <th>T</th>
             <th>kcal</th>
           </tr>
-
           <tr>{addition()}</tr>
         </tbody>
       </table>

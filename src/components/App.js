@@ -29,7 +29,6 @@ class App extends Component {
   handleClick = e => {
     e.preventDefault();
     this.products.push(this.state);
-    console.log(this.products);
     this.setState({
       name: "",
       protein: "",
@@ -40,34 +39,62 @@ class App extends Component {
     });
   };
 
+  handleRemove = name => {
+    let index = this.products.indexOf(name);
+    this.products.splice(index, 1);
+    this.setState({});
+  };
+
+  ChangeStyle = meal => {
+    let color = "";
+    if (meal === "breakfast") {
+      color = "aqua";
+    } else if (meal === "second-Breakfast") {
+      color = "palevioletred";
+    } else if (meal === "dinner") {
+      color = "green";
+    } else if (meal === "snack") {
+      color = "red";
+    } else if (meal === "supper") {
+      color = "orangered";
+    }
+
+    if (this.state.mealTime === meal) {
+      return { color: color, textDecorationLine: "underline" };
+    } else {
+      return { color: "white" };
+    }
+  };
+
   render() {
     return (
       <>
         <div className="App">
-          <h1>Daily Counter Calories</h1>
           <form>
+            <h1>Dzienny licznik kalori</h1>
             <label>
               Wpisz nazwe i ilość spożytego produktu:
               <input
                 name="name"
                 type="text"
-                placeholder="Product"
+                maxLength="20"
+                placeholder="Produkt"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
             </label>
             <input
               type="number"
-              name="amount"
-              placeholder="amount (g)"
               min="1"
               max="1000"
+              name="amount"
+              placeholder="liczba w(g)"
               value={this.state.amount}
               onChange={this.handleChange}
             />
             <br />
             <label>
-              Wpisz wartość na 100g produktu:
+              Wpisz wartość na 100 g produktu:
               <input
                 type="number"
                 name="protein"
@@ -106,62 +133,66 @@ class App extends Component {
               />
             </label>
             <br />
-            <label>Meal time: </label>
-            <label>
-              <input
-                type="radio"
-                name="mealTime"
-                value="breakfast"
-                onChange={this.handleChange}
-              />
-              Breakfast
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="mealTime"
-                value="second-Breakfast"
-                onChange={this.handleChange}
-              />
-              II Breakfast
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="mealTime"
-                value="dinner"
-                onChange={this.handleChange}
-              />
-              Dinner
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="mealTime"
-                value="snack"
-                onChange={this.handleChange}
-              />
-              Snack
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="mealTime"
-                value="supper"
-                onChange={this.handleChange}
-              />
-              Kolacja
+
+            <label>Czas posiłku: </label>
+            <label className="choiceInput">
+              <label style={this.ChangeStyle("breakfast")}>
+                <input
+                  type="radio"
+                  name="mealTime"
+                  value="breakfast"
+                  onChange={this.handleChange}
+                />
+                Śniadanie
+              </label>
+              <label style={this.ChangeStyle("second-Breakfast")}>
+                <input
+                  type="radio"
+                  name="mealTime"
+                  value="second-Breakfast"
+                  onChange={this.handleChange}
+                />
+                II Śniadanie
+              </label>
+              <label style={this.ChangeStyle("dinner")}>
+                <input
+                  type="radio"
+                  name="mealTime"
+                  value="dinner"
+                  onChange={this.handleChange}
+                />
+                Obiad
+              </label>
+              <label style={this.ChangeStyle("snack")}>
+                <input
+                  type="radio"
+                  name="mealTime"
+                  value="snack"
+                  onChange={this.handleChange}
+                />
+                Przekąska
+              </label>
+              <label style={this.ChangeStyle("supper")}>
+                <input
+                  type="radio"
+                  name="mealTime"
+                  value="supper"
+                  onChange={this.handleChange}
+                />
+                Kolacja
+              </label>
             </label>
 
             <br />
-            <button className="add" onClick={this.handleClick}>
+            <button className="buttonAdd" onClick={this.handleClick}>
               Dodaj
             </button>
           </form>
+
+          {this.products.length >= 1 ? (
+            <ShowScore product={this.products} remove={this.handleRemove} />
+          ) : null}
         </div>
-        {this.products.length >= 1 ? (
-          <ShowScore product={this.products} />
-        ) : null}
       </>
     );
   }
