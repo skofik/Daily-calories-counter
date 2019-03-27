@@ -3,16 +3,15 @@ div.App {
   display: block;
   text-align: center;
   width: 100%;
-  height: 200vh;
   background-color: whitesmoke;
   overflow: hidden;
 }
 .App h1 {
   font-size: 25px;
   text-transform: uppercase;
-  color: #3936dd;
   text-shadow: -0.2px 1px 0px white;
   text-decoration-line: underline;
+  color: #3936dd;
 }
 /*  parts Form */
 div form {
@@ -21,12 +20,12 @@ div form {
   left: 50%;
   border: 4px solid black;
   width: 90%;
-  height: 80vh;
+  height: 92vh;
   min-height: 330px;
   margin: 0;
   color: silver;
   transform: translateX(-50%);
-  background-image: url(../image/dark.png); /*obrazek ze strony lolo*/
+  background-image: url(../image/dark.png); /* Made by Tia Newbury */
 }
 
 .choiceInput {
@@ -43,16 +42,16 @@ form input {
 /*Buttoon Add and Remove */
 
 .buttonAdd {
+  padding: 10px;
+  margin: 10px;
+  font-size: 20px;
   color: silver;
   text-shadow: 2px 1px 1px black;
   border: 1px solid black;
   border-radius: 25%;
   background-color: gray;
   box-shadow: 3px 3px 10px black inset, -3px -3px 10px black inset;
-  padding: 10px;
-  margin: 10px;
   cursor: pointer;
-  font-size: 20px;
 }
 .buttonAdd:hover {
   transform: translateY(-2px);
@@ -60,6 +59,7 @@ form input {
 }
 
 .buttonRemove {
+  font-size: 10px;
   color: white;
   text-shadow: 2px 1px 1px black;
   border: 1px solid black;
@@ -68,13 +68,12 @@ form input {
   box-shadow: 3px 3px 10px black inset, -3px -3px 10px black inset;
   text-align: center;
   cursor: pointer;
-  font-size: 10px;
 }
 
 /*Container below form */
 .boardScore {
-  width: 100%;
   display: flex;
+  width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -86,33 +85,32 @@ form input {
 /* Single div */
 
 .boardScore div {
-  width: 90%;
-  border: solid 2px black;
   display: flex;
+  width: 90%;
   flex-direction: column;
   align-content: center;
   align-items: center;
-  align-content: center;
   flex-shrink: 1;
-  background-image: url(../image/dark.png);
+  background-image: url(../image/dark.png); /* Made by Tia Newbury */
+  border: solid 2px black;
   color: white;
-  margin-top: 5%;
+  margin: 5% 0;
 }
 
 .boardScore div h1 {
   width: 100%;
   height: 10%;
   padding: 0;
+  color: #3936dd;
   text-decoration-line: underline;
   text-transform: uppercase;
-  color: #3936dd;
   text-shadow: -0.4px 0.2px 0.2px white;
 }
 .boardScore div ul {
   width: 100%;
   list-style-type: none;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   padding: 4px;
   margin: 0;
 }
@@ -126,6 +124,7 @@ form input {
 }
 
 /* Color title div */
+
 div.secondBreakfast h1 {
   color: palevioletred;
 }
@@ -143,6 +142,7 @@ div.supper h1 {
 }
 
 /*Tabel in div */
+
 .boardScore table {
   width: 100%;
   position: relative;
@@ -151,17 +151,20 @@ div.supper h1 {
 .boardScore table th {
   border: 1px solid silver;
 }
+
 /*Tabel DailyCounter */
+
 .dailyCounter {
-  width: 100%;
-  border: 2px solid white;
+  width: 90%;
   position: absolute;
-  right: -1%;
+  right: 50%;
   top: 0%;
+  transform: translateX(50%);
+  border: 2px solid white;
   text-align: center;
   padding: 0.5%;
   color: white;
-  background-image: url(../image/dark.png);
+  background-image: url(../image/dark.png); /* Made by Tia Newbury */
 }
 .dailyCounter table {
   width: 100%;
@@ -175,74 +178,61 @@ div.supper h1 {
 /*Media Queris*/
 
 @media (min-width: 425px) {
-  div form {
-    height: 50vh;
-  }
   .boardScore div ul {
-    font-size: 16px;
-  }
-}
-@media (min-width: 570px) {
-  div form {
-    font-size: 18px;
-    height: 30vh;
-  }
-}
-@media (min-width: 768px) {
-  div form {
     font-size: 20px;
-    padding: 20px;
-  }
-  form input {
-    margin-left: 2%;
-    margin-top: 5%;
-    background-color: silver;
-  }
-  .boardScore div ul {
-    font-size: 25px;
   }
 }
-@media (min-width: 1024px) {
-  div form {
-    height: 60vh;
-    width: 70%;
-    border: 4px solid black;
-    margin: auto 0;
-  }
 
+@media (min-width: 500px) {
   .boardScore {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
     align-content: space-around;
-    text-align: center;
   }
   .boardScore div {
     flex-basis: 30%;
     width: 40%;
     height: 80%;
-    border: solid 2px black;
-    display: flex;
     align-content: space-around;
-    align-items: center;
-    align-content: space-around;
-    flex-direction: column;
-    background-image: url(../image/dark.png);
-    color: white;
-    margin: 10px;
   }
   .boardScore div ul {
-    font-size: 20px;
+    font-size: 11px;
   }
+}
+@media (min-width: 570px) {
+  div form {
+    height: 68vh;
+    font-size: 18px;
+    height: 30vh;
+  }
+}
+
+@media (min-width: 768px) {
+  div form {
+    height: 90vh;
+    font-size: 20px;
+    padding: 20px;
+  }
+  form input {
+    margin-top: 5%;
+  }
+  .boardScore div ul {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  div form {
+    height: 90vh;
+    width: 70%;
+    border: 4px solid black;
+    margin: auto 0;
+  }
+
   .boardScore div ul li span {
     padding: 4px;
   }
 
   .dailyCounter {
     width: 30%;
-    right: 2%;
+    right: 17%;
     top: 3%;
   }
 }

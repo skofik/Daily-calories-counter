@@ -11,9 +11,30 @@ class App extends Component {
     carbohydrate: "",
     fat: "",
     calorie: "",
-    amount: ""
+    amount: "",
+
+    errors: {
+      productName: false,
+      productAmount: false,
+      productValues: false,
+      meal: false
+    }
   };
-  correct = true;
+
+  messages = {
+    style: {
+      color: "red",
+      paddingLeft: "10px",
+      fontSize: "15px",
+      fontStyle: "italic",
+      textAlign: "center",
+      display: "inline-block"
+    },
+    productNameError: "(Proszę wpisać nazwę)",
+    productAmountError: "(Podaj liczbę do 1000g)",
+    productValuesError: "(Uzupełnij wszystkie pola i podaj liczbę do 1000g)",
+    mealError: "(Prosze zaznaczyć porę posiłku)"
+  };
 
   handleChange = e => {
     const name = e.target.name;
@@ -29,7 +50,8 @@ class App extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    if (this.correct === true) {
+    const validation = this.FormValidation();
+    if (validation.correct === true) {
       this.products.push(this.state);
       this.setState({
         name: "",
@@ -37,7 +59,22 @@ class App extends Component {
         carbohydrate: "",
         fat: "",
         calorie: "",
-        amount: ""
+        amount: "",
+        errors: {
+          productName: false,
+          productAmount: false,
+          productValues: false,
+          meal: false
+        }
+      });
+    } else {
+      this.setState({
+        errors: {
+          productName: !validation.productName,
+          productAmount: !validation.productAmount,
+          productValues: !validation.productValues,
+          meal: !validation.meal
+        }
       });
     }
   };
@@ -69,50 +106,55 @@ class App extends Component {
     }
   };
 
-  CheckedValue = name => {
-    const style = {
-      color: "red",
-      paddingLeft: "10px",
-      fontSize: "15px",
-      fontStyle: "italic"
-    };
-    const { protein, carbohydrate, fat, calorie, amount } = this.state;
+  FormValidation = () => {
+    let productName = false;
+    let productAmount = false;
+    let productValues = false;
+    let meal = false;
+    let correct = false;
 
-    if (name === "components") {
-      if (
-        calorie > 1000 ||
-        carbohydrate > 1000 ||
-        fat > 1000 ||
-        protein > 1000
-      ) {
-        this.correct = false;
-        return (
-          <span style={style}>(liczba nie może być wieksza niż 1000 g) </span>
-        );
-      } else {
-        this.correct = true;
-      }
-    } else if (name === "amount") {
-      if (amount > 1000) {
-        this.correct = false;
-        return (
-          <span style={style}>(liczba nie może być wieksza niż 1000 g) </span>
-        );
-      } else {
-        this.correct = true;
-      }
-    } else if (name === "meal") {
-      if (this.state.mealTime === "") {
-        return <span style={style}>(proszę zaznaczyć porę posiłku) </span>;
-      }
+    const {
+      protein,
+      carbohydrate,
+      fat,
+      calorie,
+      amount,
+      mealTime,
+      name
+    } = this.state;
+
+    if (
+      (calorie < 1000 || carbohydrate < 1000 || fat < 1000 || protein < 1000) &&
+      (calorie !== "" && carbohydrate !== "" && fat !== "" && protein !== "")
+    ) {
+      productValues = true;
     }
+    if (amount < 1000 && amount !== "") {
+      productAmount = true;
+    }
+    if (mealTime !== "") {
+      meal = true;
+    }
+    if (name !== "") {
+      productName = true;
+    }
+    if (productName & productAmount & productValues & meal) {
+      correct = true;
+    }
+    return {
+      productName,
+      productAmount,
+      productValues,
+      meal,
+      correct
+    };
   };
 
   render() {
     return (
       <>
         <div className="App">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} noValidate>
             <h1>Dzienny licznik kalori</h1>
             <label>
               Wpisz nazwe i ilość spożytego produktu:
@@ -124,6 +166,11 @@ class App extends Component {
                 value={this.state.name}
                 onChange={this.handleChange}
               />
+              {this.state.errors.productName && (
+                <span style={this.messages.style}>
+                  {this.messages.productNameError}
+                </span>
+              )}
             </label>
             <input
               type="number"
@@ -134,7 +181,11 @@ class App extends Component {
               value={this.state.amount}
               onChange={this.handleChange}
             />
-            {this.CheckedValue("amount")}
+            {this.state.errors.productAmount && (
+              <span style={this.messages.style}>
+                {this.messages.productAmountError}
+              </span>
+            )}
             <br />
             <label>
               Wpisz wartość na 100 g produktu:
@@ -174,8 +225,12 @@ class App extends Component {
                 value={this.state.calorie}
                 onChange={this.handleChange}
               />
-              {this.CheckedValue("components")}
             </label>
+            {this.state.errors.productValues && (
+              <span style={this.messages.style}>
+                {this.messages.productValuesError}
+              </span>
+            )}
             <br />
 
             <label>Czas posiłku: </label>
@@ -226,7 +281,9 @@ class App extends Component {
                 Kolacja
               </label>
             </label>
-            {this.CheckedValue("meal")}
+            {this.state.errors.meal && (
+              <span style={this.messages.style}>{this.messages.mealError}</span>
+            )}
 
             <br />
             <button className="buttonAdd">Dodaj</button>
