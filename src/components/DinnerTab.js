@@ -2,11 +2,11 @@ import React from "react";
 import Listitem from "./Listitem";
 
 const DinnerTab = props => {
-  const short = props.tabDinner;
+  const products = props.tabDinner;
 
   return (
     <div className="dinner">
-      <Listitem short={short} remove={props.remove} />
+      <Listitem products={products} remove={props.remove} />
     </div>
   );
 };

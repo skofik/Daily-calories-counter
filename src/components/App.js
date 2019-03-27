@@ -13,6 +13,7 @@ class App extends Component {
     calorie: "",
     amount: ""
   };
+  correct = true;
 
   handleChange = e => {
     const name = e.target.name;
@@ -26,17 +27,19 @@ class App extends Component {
       });
     }
   };
-  handleClick = e => {
+  handleSubmit = e => {
     e.preventDefault();
-    this.products.push(this.state);
-    this.setState({
-      name: "",
-      protein: "",
-      carbohydrate: "",
-      fat: "",
-      calorie: "",
-      amount: ""
-    });
+    if (this.correct === true) {
+      this.products.push(this.state);
+      this.setState({
+        name: "",
+        protein: "",
+        carbohydrate: "",
+        fat: "",
+        calorie: "",
+        amount: ""
+      });
+    }
   };
 
   handleRemove = name => {
@@ -66,11 +69,50 @@ class App extends Component {
     }
   };
 
+  CheckedValue = name => {
+    const style = {
+      color: "red",
+      paddingLeft: "10px",
+      fontSize: "15px",
+      fontStyle: "italic"
+    };
+    const { protein, carbohydrate, fat, calorie, amount } = this.state;
+
+    if (name === "components") {
+      if (
+        calorie > 1000 ||
+        carbohydrate > 1000 ||
+        fat > 1000 ||
+        protein > 1000
+      ) {
+        this.correct = false;
+        return (
+          <span style={style}>(liczba nie może być wieksza niż 1000 g) </span>
+        );
+      } else {
+        this.correct = true;
+      }
+    } else if (name === "amount") {
+      if (amount > 1000) {
+        this.correct = false;
+        return (
+          <span style={style}>(liczba nie może być wieksza niż 1000 g) </span>
+        );
+      } else {
+        this.correct = true;
+      }
+    } else if (name === "meal") {
+      if (this.state.mealTime === "") {
+        return <span style={style}>(proszę zaznaczyć porę posiłku) </span>;
+      }
+    }
+  };
+
   render() {
     return (
       <>
         <div className="App">
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <h1>Dzienny licznik kalori</h1>
             <label>
               Wpisz nazwe i ilość spożytego produktu:
@@ -92,6 +134,7 @@ class App extends Component {
               value={this.state.amount}
               onChange={this.handleChange}
             />
+            {this.CheckedValue("amount")}
             <br />
             <label>
               Wpisz wartość na 100 g produktu:
@@ -131,6 +174,7 @@ class App extends Component {
                 value={this.state.calorie}
                 onChange={this.handleChange}
               />
+              {this.CheckedValue("components")}
             </label>
             <br />
 
@@ -182,11 +226,10 @@ class App extends Component {
                 Kolacja
               </label>
             </label>
+            {this.CheckedValue("meal")}
 
             <br />
-            <button className="buttonAdd" onClick={this.handleClick}>
-              Dodaj
-            </button>
+            <button className="buttonAdd">Dodaj</button>
           </form>
 
           {this.products.length >= 1 ? (

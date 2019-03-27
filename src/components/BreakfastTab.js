@@ -2,10 +2,10 @@ import React from "react";
 import Listitem from "./Listitem";
 
 const BreakfastTab = props => {
-  const short = props.tabBreakfast;
+  const products = props.tabBreakfast;
   return (
     <div className="breakfast">
-      <Listitem short={short} remove={props.remove} />
+      <Listitem products={products} remove={props.remove} />
     </div>
   );
 };

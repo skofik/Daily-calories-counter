@@ -6,14 +6,14 @@ const Listitem = props => {
     let amountCarbons = 0;
     let amountFat = 0;
     let amountCalories = 0;
-    for (let i = 0; i < props.short.length; i++) {
+    for (let i = 0; i < props.products.length; i++) {
       amountProtein +=
-        props.short[i].protein * 1 * (props.short[i].amount / 100);
+        props.products[i].protein * 1 * (props.products[i].amount / 100);
       amountCarbons +=
-        props.short[i].carbohydrate * 1 * (props.short[i].amount / 100);
-      amountFat += props.short[i].fat * 1 * (props.short[i].amount / 100);
+        props.products[i].carbohydrate * 1 * (props.products[i].amount / 100);
+      amountFat += props.products[i].fat * 1 * (props.products[i].amount / 100);
       amountCalories +=
-        props.short[i].calorie * 1 * (props.short[i].amount / 100);
+        props.products[i].calorie * 1 * (props.products[i].amount / 100);
     }
     return (
       <>
@@ -26,7 +26,7 @@ const Listitem = props => {
   };
 
   const liCreation = () => {
-    return props.short.map(item => (
+    return props.products.map(item => (
       <li key={item.name}>
         <span className="productName">{item.name}</span>
         <span>
@@ -51,11 +51,23 @@ const Listitem = props => {
       </li>
     ));
   };
-  const name = props.short[0].mealTime;
+  const name = () => {
+    if (props.products[0].mealTime === "breakfast") {
+      return "Śniadanie";
+    } else if (props.products[0].mealTime === "second-Breakfast") {
+      return "II Śniadanie";
+    } else if (props.products[0].mealTime === "dinner") {
+      return "Obiad";
+    } else if (props.products[0].mealTime === "snack") {
+      return "Przekąska";
+    } else if (props.products[0].mealTime === "supper") {
+      return "Kolacja";
+    }
+  };
 
   return (
     <>
-      <h1> {name}</h1>
+      <h1> {name()}</h1>
       <h3>Nazwa produktu | białka | węgle | tłuszcze | kalorie</h3>
       <ul>{liCreation()}</ul>
       <table>
