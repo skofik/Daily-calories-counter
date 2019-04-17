@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import "../styles/App.css";
 import ShowScore from "./ShowScore";
+import SaveProductContainer from "./SaveProductContainer";
 
 class App extends Component {
   products = [];
+  saveProduct = [];
+  tabelRestApiProduct = [];
   state = {
     name: "",
     mealTime: "",
@@ -12,6 +15,8 @@ class App extends Component {
     fat: "",
     calorie: "",
     amount: "",
+    save: false,
+    visibleSave: false,
 
     errors: {
       productName: false,
@@ -31,28 +36,119 @@ class App extends Component {
       display: "inline-block"
     },
     productNameError: "(Proszę wpisać nazwę)",
-    productAmountError: "(Podaj liczbę do 1000g)",
+    productAmountError: "(Podaj liczbę od 0 do 1000g)",
     productValuesError: "(Uzupełnij wszystkie pola i podaj liczbę do 1000g)",
     mealError: "(Prosze zaznaczyć porę posiłku)"
   };
 
+
+  // brak dostepnego lepszego api do uzupelnienia wyszukiwarki ;/
+
+
+  SecondPart = () => {
+    this.tabelRestApiProduct.forEach((food, index) => {
+
+
+      if (food.name.indexOf(`${this.state.name}`) >= 0) {
+
+        let calorie;
+        let carbohydrate;
+        let fat;
+        food.nutrients.forEach(nutrient => {
+
+          if (nutrient.nutrient_id === "208") {
+            calorie = nutrient.value
+          } else if (nutrient.nutrient_id === "205") {
+            carbohydrate = nutrient.value
+          } else if (nutrient.nutrient_id === "204") {
+            fat = nutrient.value
+          }
+
+        })
+
+        this.setState({
+          carbohydrate: carbohydrate,
+          fat: fat,
+          calorie: calorie,
+        })
+
+      }
+
+    })
+  }
+
+  handleSreachProduct = () => {
+
+    const API = "http://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=DEMO_KEY&nutrients=205&nutrients=204&nutrients=208&nutrients=269";
+    fetch(API)
+      .then(response => {
+        if (response.ok) { return response }
+        throw Error("przekroczono liczbe żądań")
+      })
+      .then(response => response.json())
+      .then(data => this.tabelRestApiProduct = data.report.foods.slice())
+      .catch(err => console.log(err))
+  }
+
   handleChange = e => {
     const name = e.target.name;
+    let index;
+
+    this.saveProduct.forEach((item) => {
+      if (item.name === e.target.value) {
+        index = this.saveProduct.indexOf(item)
+      }
+    })
     if (e.target.name === "mealTime") {
       this.setState({
         mealTime: e.target.value
       });
-    } else {
+    } else if (e.target.name === "save") {
       this.setState({
-        [name]: e.target.value
+        save: !this.state.save
       });
     }
+    else {
+      if (typeof (index) === "number") {
+        const { name, mealTime, protein, carbohydrate, fat, calorie, amount } = this.saveProduct[index]
+        this.setState({
+          name: name,
+          mealTime: mealTime,
+          protein: protein,
+          carbohydrate: carbohydrate,
+          fat: fat,
+          calorie: calorie,
+          amount: amount,
+        });
+        index = "zero"
+      } else {
+        this.setState({
+          [name]: e.target.value
+        });
+      }
+    }
+
   };
+
+  componentDidMount() {
+    this.handleSreachProduct()
+  }
+
+
+
   handleSubmit = e => {
     e.preventDefault();
+
+
     const validation = this.FormValidation();
+
+
+
     if (validation.correct === true) {
       this.products.push(this.state);
+      if (this.state.save === true) {
+        this.saveProduct.push(this.state)
+      }
       this.setState({
         name: "",
         protein: "",
@@ -77,12 +173,16 @@ class App extends Component {
         }
       });
     }
+
+
+
   };
 
-  handleRemove = name => {
-    let index = this.products.indexOf(name);
+  handleRemove = item => {
+    let index = this.products.indexOf(item);
     this.products.splice(index, 1);
-    this.setState({});
+    this.setState({
+    });
   };
 
   ChangeStyle = meal => {
@@ -124,7 +224,7 @@ class App extends Component {
     } = this.state;
 
     if (
-      (calorie < 1000 || carbohydrate < 1000 || fat < 1000 || protein < 1000) &&
+      ((calorie < 1000 && calorie > 0) && (carbohydrate < 1000 && carbohydrate > 0) && (fat < 1000 && fat > 0) && (protein < 1000 && protein > 0)) &&
       (calorie !== "" && carbohydrate !== "" && fat !== "" && protein !== "")
     ) {
       productValues = true;
@@ -150,10 +250,22 @@ class App extends Component {
     };
   };
 
+  handleSaveProduct = () => {
+
+    this.setState({
+      visibleSave: !this.state.visibleSave
+    })
+  }
+
+
+
   render() {
+
     return (
       <>
         <div className="App">
+          <span className="saveIcon" onClick={this.handleSaveProduct} style={this.state.visibleSave ? { color: "white" } : null}> <i className="fas fa-save"></i></span>
+          {this.state.visibleSave ? <SaveProductContainer product={this.saveProduct} /> : null}
           <form onSubmit={this.handleSubmit} noValidate>
             <h1>Dzienny licznik kalori</h1>
             <label>
@@ -286,7 +398,7 @@ class App extends Component {
             )}
 
             <br />
-            <button className="buttonAdd">Dodaj</button>
+            <button className="buttonAdd">Dodaj</button> <label><input type="checkbox" name="save" value="save" onChange={this.handleChange} />zapisz produkt</label>
           </form>
 
           {this.products.length >= 1 ? (

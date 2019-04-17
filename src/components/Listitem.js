@@ -26,8 +26,8 @@ const Listitem = props => {
   };
 
   const liCreation = () => {
-    return props.products.map(item => (
-      <li key={item.name}>
+    return props.products.map((item, index) => (
+      <li key={item.name + index}>
         <span className="productName">{item.name}</span>
         <span>
           |{item.protein}
