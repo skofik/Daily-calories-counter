@@ -1,6 +1,8 @@
 import React from "react";
 
 const DailyCounter = props => {
+
+
   const amountAll = () => {
     let amountProtein = 0;
     let amountCarbons = 0;
@@ -8,17 +10,11 @@ const DailyCounter = props => {
     let amountCalories = 0;
 
     for (let i = 0; i < props.product.length; i++) {
-      amountProtein =
-        amountProtein +
-        props.product[i].protein * 1 * (props.product[i].amount / 100);
-      amountCarbons =
-        amountCarbons +
-        props.product[i].carbohydrate * 1 * (props.product[i].amount / 100);
-      amountFat =
-        amountFat + props.product[i].fat * 1 * (props.product[i].amount / 100);
-      amountCalories =
-        amountCalories +
-        props.product[i].calorie * 1 * (props.product[i].amount / 100);
+      const { protein, carbohydrate, fat, calorie, amount } = props.product[i];
+      amountProtein = amountProtein + protein * 1 * (amount / 100);
+      amountCarbons = amountCarbons + carbohydrate * 1 * (amount / 100);
+      amountFat = amountFat + fat * 1 * (amount / 100);
+      amountCalories = amountCalories + calorie * 1 * (amount / 100);
     }
     return (
       <>

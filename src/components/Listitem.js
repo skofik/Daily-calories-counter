@@ -1,19 +1,20 @@
 import React from "react";
 
 const Listitem = props => {
+
   const addition = () => {
     let amountProtein = 0;
     let amountCarbons = 0;
     let amountFat = 0;
     let amountCalories = 0;
+
+
     for (let i = 0; i < props.products.length; i++) {
-      amountProtein +=
-        props.products[i].protein * 1 * (props.products[i].amount / 100);
-      amountCarbons +=
-        props.products[i].carbohydrate * 1 * (props.products[i].amount / 100);
-      amountFat += props.products[i].fat * 1 * (props.products[i].amount / 100);
-      amountCalories +=
-        props.products[i].calorie * 1 * (props.products[i].amount / 100);
+      const { protein, carbohydrate, fat, calorie, amount } = props.products[i];
+      amountProtein += protein * 1 * (amount / 100);
+      amountCarbons += carbohydrate * 1 * (amount / 100);
+      amountFat += fat * 1 * (amount / 100);
+      amountCalories += calorie * 1 * (amount / 100);
     }
     return (
       <>
@@ -29,25 +30,11 @@ const Listitem = props => {
     return props.products.map((item, index) => (
       <li key={item.name + index}>
         <span className="productName">{item.name}</span>
-        <span>
-          |{item.protein}
-          <small>(b)</small>|
-        </span>
-        <span>
-          |{item.carbohydrate}
-          <small>(w)</small>|
-        </span>
-        <span>
-          |{item.fat}
-          <small>(t)</small>|
-        </span>
-        <span>
-          |{item.calorie}
-          <small>(kcal)</small>|
-        </span>
-        <button className="buttonRemove" onClick={() => props.remove(item)}>
-          x
-        </button>
+        <span>|{item.protein}<small>(b)</small>|</span>
+        <span>|{item.carbohydrate}<small>(w)</small>|</span>
+        <span>|{item.fat}<small>(t)</small>|</span>
+        <span>|{item.calorie}<small>(kcal)</small>|</span>
+        <button className="buttonRemove" onClick={() => props.remove(item)}> x </button>
       </li>
     ));
   };
