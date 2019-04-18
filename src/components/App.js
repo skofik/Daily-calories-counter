@@ -201,7 +201,7 @@ class App extends Component {
     return (
       <>
         <div className="App">
-          <span className="saveIcon" onClick={this.handleSaveProduct} style={visibleSave ? { color: "white" } : null}> <i className="fas fa-save"></i></span>
+          <span className="saveIcon" onClick={this.handleSaveProduct} style={visibleSave ? { color: "blue" } : null}> <i className="fas fa-save"></i></span>
           {visibleSave ? <SaveProductContainer product={this.saveProduct} /> : null}
 
           <form onSubmit={this.handleSubmit} noValidate>
