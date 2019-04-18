@@ -391,7 +391,7 @@ div.supper h1 {
    }
    .saveIcon{
     position: relative;;
-     top:0%;
+     top:1%;
      left:-35%;
      font-size: 35px;
      color: black;
@@ -401,6 +401,10 @@ div.supper h1 {
     max-width: 1345px;
     margin:0 auto;   
   
+  }
+  .dailyCounter {
+    right: 30%;
+    top: 1%;  
   }
   
 }
