@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/Daily-calories-counter/static/js/runtime~main.aea54a95.js"
   },
   {
-    "revision": "9b7154a1620c8fcf2456",
-    "url": "/Daily-calories-counter/static/js/main.caff45e1.chunk.js"
+    "revision": "2f916e8ec8e4ebe1bc36",
+    "url": "/Daily-calories-counter/static/js/main.3c8abefc.chunk.js"
   },
   {
     "revision": "c411c6295b691d07baae",
     "url": "/Daily-calories-counter/static/js/2.500d5162.chunk.js"
   },
   {
-    "revision": "9b7154a1620c8fcf2456",
-    "url": "/Daily-calories-counter/static/css/main.e336182f.chunk.css"
+    "revision": "2f916e8ec8e4ebe1bc36",
+    "url": "/Daily-calories-counter/static/css/main.a6ff1331.chunk.css"
   },
   {
-    "revision": "530a42362427d35fe8cbc1fac0e9acca",
+    "revision": "76edfc548d99a444d4d6d68de1857aba",
     "url": "/Daily-calories-counter/index.html"
   }
 ];

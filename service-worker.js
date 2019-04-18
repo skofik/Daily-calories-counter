@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Daily-calories-counter/precache-manifest.663d2eab659d28f63330f47a6fb4ddd4.js"
+  "/Daily-calories-counter/precache-manifest.2608631ff94689b20d2f792e7e5a2c02.js"
 );
 
 workbox.clientsClaim();

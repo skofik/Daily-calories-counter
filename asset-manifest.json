@@ -1,14 +1,14 @@
 {
-  "main.css": "/Daily-calories-counter/static/css/main.e336182f.chunk.css",
-  "main.js": "/Daily-calories-counter/static/js/main.caff45e1.chunk.js",
-  "main.js.map": "/Daily-calories-counter/static/js/main.caff45e1.chunk.js.map",
+  "main.css": "/Daily-calories-counter/static/css/main.a6ff1331.chunk.css",
+  "main.js": "/Daily-calories-counter/static/js/main.3c8abefc.chunk.js",
+  "main.js.map": "/Daily-calories-counter/static/js/main.3c8abefc.chunk.js.map",
   "runtime~main.js": "/Daily-calories-counter/static/js/runtime~main.aea54a95.js",
   "runtime~main.js.map": "/Daily-calories-counter/static/js/runtime~main.aea54a95.js.map",
   "static/js/2.500d5162.chunk.js": "/Daily-calories-counter/static/js/2.500d5162.chunk.js",
   "static/js/2.500d5162.chunk.js.map": "/Daily-calories-counter/static/js/2.500d5162.chunk.js.map",
   "index.html": "/Daily-calories-counter/index.html",
-  "precache-manifest.663d2eab659d28f63330f47a6fb4ddd4.js": "/Daily-calories-counter/precache-manifest.663d2eab659d28f63330f47a6fb4ddd4.js",
+  "precache-manifest.2608631ff94689b20d2f792e7e5a2c02.js": "/Daily-calories-counter/precache-manifest.2608631ff94689b20d2f792e7e5a2c02.js",
   "service-worker.js": "/Daily-calories-counter/service-worker.js",
-  "static/css/main.e336182f.chunk.css.map": "/Daily-calories-counter/static/css/main.e336182f.chunk.css.map",
+  "static/css/main.a6ff1331.chunk.css.map": "/Daily-calories-counter/static/css/main.a6ff1331.chunk.css.map",
   "static/media/App.css": "/Daily-calories-counter/static/media/dark.e547a578.png"
 }
